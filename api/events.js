@@ -1,3 +1,5 @@
-export function onConnection(socket){
-    console.log("New user connected",socket?.handshake?.address);
+import {store} from "../sharedData.js";
+
+export function onStopsRequest(socket){
+    socket.emit("stopsReceive",store.stopsViewModel);
 }

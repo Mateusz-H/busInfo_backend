@@ -4,7 +4,7 @@ export class SocketIoServer{
     constructor(serverInstance,baseUrl) {
         return new Server(serverInstance,{ cors: {
                 origin: baseUrl,
-                methods: ["GET", "POST"]
-            }});
+                methods: ["websocket"]
+            },path:"/api"});
     }
 }

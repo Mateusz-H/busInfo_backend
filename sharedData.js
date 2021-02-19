@@ -8,7 +8,8 @@ export const store = {
     if (dates.length > 0) {
       this.stops = stops[dates[0]]?.stops;
       this.stops.forEach((x) => {
-          this.stopsViewModel[x.stopDesc]? this.stopsViewModel[x.stopDesc].push(x.stopId):this.stopsViewModel[x.stopDesc]=[x.stopId]
+        let stopName = x.stopDesc.replace(" (N/Ż)","").trimEnd();
+          this.stopsViewModel[stopName]? this.stopsViewModel[stopName].push(x.stopId):this.stopsViewModel[stopName]=[x.stopId]
       });
     } else console.log("Cannot find any stop information");
     //todo add logger
