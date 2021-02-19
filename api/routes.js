@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
     res.send('Hello World')
 })
 router.get('/stops', function (req, res) {
-    res.send(store.stops)
+    res.send(store.stopsViewModel)
 })
 
 export default router;
