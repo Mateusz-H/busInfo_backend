@@ -1,0 +1,18 @@
+{
+  "name": "busInfo_backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/Mateusz-H/busInfo_backend.git",
+  "author": "Mateusz Hinca <mathew.b@bbod.io>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+
+  }
+}
