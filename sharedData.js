@@ -2,16 +2,47 @@ import { getNearestDate } from "./utils/dataUtils.js";
 
 export const store = {
   stops: {},
-  stopsViewModel: {},
+  stopsWithIds: {},
+  timetable:{},
+  numberOfUsersInStopChannel: {},
+  activeChannels: [],
   setStops: function (stops) {
     let dates = getNearestDate(Object.keys(stops));
     if (dates.length > 0) {
       this.stops = stops[dates[0]]?.stops;
-      this.stops.forEach((x) => {
-        let stopName = x.stopDesc.replace(" (N/Ż)","").trimEnd();
-          this.stopsViewModel[stopName]? this.stopsViewModel[stopName].push(x.stopId):this.stopsViewModel[stopName]=[x.stopId]
-      });
+      this.setStopsWithId();
     } else console.log("Cannot find any stop information");
     //todo add logger
+  },
+  setStopsWithId: function () {
+    this.stops.forEach((x) => {
+      let stopName = x.stopDesc.replace(" (N/Ż)", "").trimEnd();
+      this.stopsWithIds[stopName]
+        ? this.stopsWithIds[stopName].push(x.stopId)
+        : (this.stopsWithIds[stopName] = [x.stopId]);
+      this.numberOfUsersInStopChannel[stopName] = 0;
+    });
+    console.log(this.stopsWithIds)
+  },
+  setTimetable:function (timetable){
+    this.timetable=timetable;
+  },
+  incrementNumberOfUsersInStopChannel: function (stopName) {
+    this.numberOfUsersInStopChannel[stopName] += 1;
+  },
+  decrementNumberOfUsersInStopChannel: function (stopName) {
+    this.numberOfUsersInStopChannel[stopName] -= 1;
+    if (this.numberOfUsersInStopChannel[stopName] < 0) {
+      this.numberOfUsersInStopChannel[stopName] = 0;
+    }
+  },
+  addStopToActiveChannels: function (stopName) {
+    this.activeChannels.push(stopName);
+  },
+  removeStopFromActiveChannels: function (stopName) {
+    const index = this.activeChannels.indexOf(stopName);
+    if (index > -1) {
+      this.activeChannels.splice(index, 1);
+    }
   },
 };
