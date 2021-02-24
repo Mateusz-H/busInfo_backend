@@ -43,7 +43,7 @@ export function onDisconnectRequest() {
   }
 }
 export function sendNewTimetableToActiveChannels() {
-  console.log("Sending new timbetable",store.activeChannels)
+  console.log("Sending new timetable",store.activeChannels)
   store.activeChannels.forEach((channelName) => {
     socketIoServer.socketIo.to(channelName).emit(batchTimetables(store.stopsWithIds[channelName]));
   });
