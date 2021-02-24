@@ -38,7 +38,8 @@ export const store = {
       this.numberOfUsersInStopChannel[stopName] = 0;
     }
   },
-  addStopToActiveChannels: function (stopName) {
+  addStopToActiveChannels: function (socket,stopName) {
+    if(!socket.adapter.rooms.has(stopName))
     this.activeChannels.push(stopName);
   },
   removeStopFromActiveChannels: function (stopName) {

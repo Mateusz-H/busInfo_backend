@@ -9,7 +9,7 @@ export function onStopsRequest(socket) {
 export function onJoinToStopChannelRequest(socket, stopName) {
   if (store.stopsWithIds.hasOwnProperty(stopName)) {
     store.incrementNumberOfUsersInStopChannel(stopName);
-    store.addStopToActiveChannels(stopName);
+    store.addStopToActiveChannels(socket,stopName);
     socket.join(stopName);
     socket.emit(
       "timetableReceive",
