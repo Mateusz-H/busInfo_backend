@@ -1,4 +1,4 @@
-import {store} from "../sharedData.js";
+import {timetablesService} from "../app.js";
 
 export function getNearestDate(array) {
   return array.sort((a, b) => new Date(a) - new Date(b));
@@ -6,8 +6,8 @@ export function getNearestDate(array) {
 export function batchTimetables(arrayOfTimetableIds){
   let batchedTimetable={};
   arrayOfTimetableIds.forEach(x=>{
-    if(store.timetable.hasOwnProperty(x))
-    batchedTimetable={...batchedTimetable,[x]:store.timetable[x]}
+    if(timetablesService.timetable.hasOwnProperty(x))
+    batchedTimetable={...batchedTimetable,[x]:timetablesService.timetable[x]}
   })
   return batchedTimetable;
 }

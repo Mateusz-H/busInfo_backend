@@ -1,5 +1,5 @@
 import express from "express";
-import {store} from "../sharedData.js";
+import {stopsService} from "../app.js";
 const router = express.Router()
 
 router.use((req, res, next)=>{
@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
     res.send('Hello World')
 })
 router.get('/stops', function (req, res) {
-    res.send(store.stopsWithIds)
+    res.send(stopsService.stopsWithIds)
 })
 
 export default router;
