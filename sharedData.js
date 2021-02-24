@@ -3,8 +3,9 @@ import { getNearestDate } from "./utils/dataUtils.js";
 export const store = {
   stops: {},
   stopsWithIds: {},
-  timetable:{},
+  timetable: {},
   numberOfUsersInStopChannel: {},
+  numberOfActiveUsers: 0,
   activeChannels: [],
   setStops: function (stops) {
     let dates = getNearestDate(Object.keys(stops));
@@ -22,10 +23,10 @@ export const store = {
         : (this.stopsWithIds[stopName] = [x.stopId]);
       this.numberOfUsersInStopChannel[stopName] = 0;
     });
-    console.log(this.stopsWithIds)
+    console.log(this.stopsWithIds);
   },
-  setTimetable:function (timetable){
-    this.timetable=timetable;
+  setTimetable: function (timetable) {
+    this.timetable = timetable;
   },
   incrementNumberOfUsersInStopChannel: function (stopName) {
     this.numberOfUsersInStopChannel[stopName] += 1;
@@ -33,6 +34,7 @@ export const store = {
   decrementNumberOfUsersInStopChannel: function (stopName) {
     this.numberOfUsersInStopChannel[stopName] -= 1;
     if (this.numberOfUsersInStopChannel[stopName] < 0) {
+      this.removeStopFromActiveChannels(stopName);
       this.numberOfUsersInStopChannel[stopName] = 0;
     }
   },
