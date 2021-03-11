@@ -17,7 +17,7 @@ export class TimetablesService {
   keepTimetableUpToDate() {
     this.upToDateInterval = setInterval(
       () => this.getTimetable().then(()=>this.updateUsersTimetables()),
-      5000
+      30000
     );
   }
   stopKeepingTimetableUpToDate() {
@@ -30,6 +30,7 @@ export class TimetablesService {
         .to(stopName)
         .emit(
           "timetableReceive",
+            stopName,
           batchTimetables(stopsService.stopsWithIds[stopName])
         );
     });

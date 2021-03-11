@@ -1,5 +1,5 @@
 import express from "express";
-import {stopsService} from "../app.js";
+import {routesService, stopsService} from "../app.js";
 const router = express.Router()
 
 router.use((req, res, next)=>{
@@ -13,6 +13,9 @@ router.get('/', function (req, res) {
 })
 router.get('/stops', function (req, res) {
     res.send(stopsService.stopsWithIds)
+})
+router.get('/routes', function (req, res) {
+    res.send(routesService.routes)
 })
 
 export default router;

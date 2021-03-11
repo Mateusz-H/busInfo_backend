@@ -1,5 +1,6 @@
 import { Server } from "socket.io";
 import { stopsService } from "../app.js";
+import {batchTimetables} from "../utils/dataUtils.js";
 
 export class SocketIoServer {
   socketIo;
@@ -36,15 +37,22 @@ export class SocketIoServer {
     socket.emit("stopsReceive", stopsService.stopsWithIds);
   }
   onJoinToStopChannelRequest(socket, stopName) {
-    socket.join(stopName);
-    this.addStopToActiveChannels(stopName);
+    if(stopsService.stopsWithIds.hasOwnProperty(stopName)){
+      socket.join(stopName);
+      socket.emit("timetableReceive",stopName,batchTimetables(stopsService.stopsWithIds[stopName]))
+      this.addStopToActiveChannels(stopName);
 
-    if (this.activeChannelsForUsers.hasOwnProperty(socket.id)) {
-      if (this.activeChannelsForUsers[socket.id].indexOf(stopName) === -1)
-        this.activeChannelsForUsers[socket.id].push(stopName);
-    } else {
-      this.activeChannelsForUsers[socket.id] = [stopName];
+      if (this.activeChannelsForUsers.hasOwnProperty(socket.id)) {
+        if (this.activeChannelsForUsers[socket.id].indexOf(stopName) === -1)
+          this.activeChannelsForUsers[socket.id].push(stopName);
+      } else {
+        this.activeChannelsForUsers[socket.id] = [stopName];
+      }
     }
+    else{
+      socket.emit("invalidStopName");
+    }
+
   }
   onLeaveStopChannelRequest(socket, stopName) {
     socket.leave(stopName);
