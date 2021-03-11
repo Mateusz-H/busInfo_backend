@@ -1,5 +1,5 @@
 import express from "express";
-import {routesService, stopsService} from "../app.js";
+import {routesService, stopsService, timetablesService} from "../app.js";
 const router = express.Router()
 
 router.use((req, res, next)=>{
@@ -16,6 +16,9 @@ router.get('/stops', function (req, res) {
 })
 router.get('/routes', function (req, res) {
     res.send(routesService.routes)
+})
+router.get('/timetable', function (req, res) {
+    res.send(timetablesService.timetable)
 })
 
 export default router;
