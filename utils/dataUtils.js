@@ -7,7 +7,7 @@ export function batchTimetables(arrayOfTimetableIds){
   let batchedTimetable=[];
   arrayOfTimetableIds.forEach(x=>{
     if(timetablesService.timetable.hasOwnProperty(x))
-    batchedTimetable=[...batchedTimetable,insertRouteIdIntoTimetable(timetablesService.timetable[x].delay)]
+    batchedTimetable=[...batchedTimetable,...insertRouteIdIntoTimetable(timetablesService.timetable[x].delay)]
   })
   return batchedTimetable;
 }

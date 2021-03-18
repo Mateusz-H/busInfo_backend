@@ -14,6 +14,9 @@ router.get('/', function (req, res) {
 router.get('/stops', function (req, res) {
     res.send(stopsService.stopsWithIds)
 })
+router.get('/stopsAll', function (req, res) {
+    res.send(stopsService.stops)
+})
 router.get('/routes', function (req, res) {
     res.send(routesService.routes)
 })
