@@ -17,7 +17,7 @@ export class StopsService {
   setStops(stops) {
     let dates = getNearestDate(Object.keys(stops));
     if (dates.length > 0) {
-      this.stops = stops[dates[0]]?.stops;
+      this.stops = stops[dates[0]]?.stops.filter(stop=>stop.stopDesc.indexOf("(techniczny)")===-1)
       this.setStopsWithId();
     } else console.log("Cannot find any stop information");
     //todo add logger
