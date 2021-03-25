@@ -8,4 +8,4 @@ yarn
 # serve with hot reload at localhost:4000
 yarn start
 ```
->This app require [frontend](https://github.com/Mateusz-H/busInfo_frontend)
+>This app requires [frontend](https://github.com/Mateusz-H/busInfo_frontend)
